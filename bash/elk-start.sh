@@ -1,0 +1,1 @@
+kubectl apply -R -f ../manifests/elk -n observability

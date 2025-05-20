@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: logstash-config
+data:
+  logstash.conf: |
+    input {
+      redis {
+        host => "redis.microservices.svc.cluster.local"
+        port => 6379
+        data_type => "channel"
+        key => "log_channel"
+        codec => "json"
+      }
+    }
+
+    output {
+      elasticsearch {
+        hosts => ["http://elasticsearch:9200"]
+        index => "todos-logs"
+      }
+    }
+
